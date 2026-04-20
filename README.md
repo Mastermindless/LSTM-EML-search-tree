@@ -243,7 +243,7 @@ step= 1200  r_mean=0.420  r_max=1.000  best=1.000  H=1.87  beta=0.015  digits=64
 LSTM-EML-search-tree/
 ├── README.md
 ├── requirements.txt
-  /src
+  /src-tree-search
   ├── config.py
   ├── eml_tree.py
   ├── targets.py
