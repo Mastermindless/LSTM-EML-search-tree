@@ -157,13 +157,13 @@ Prefix sequence → tree (example):
 pip install -r requirements.txt
 
 # quick CPU smoke-test (30 steps, ~1 s)
-python train.py --target pi --device cpu --steps 30 --batch 16
+python3 train.py --target pi --device cpu --steps 30 --batch 16
 
 # full GPU run on Apple silicon (~20 k steps, ~10 min)
-python train.py --target pi --device mps
+python3 train.py --target pi --device mps
 
 # inspect top-k discovered trees
-python inference.py --ckpt checkpoints/lstm_eml_pi.pt --k 5
+python3 inference.py --ckpt checkpoints/lstm_eml_pi.pt --k 5
 ```
 
 ### Expected terminal output
