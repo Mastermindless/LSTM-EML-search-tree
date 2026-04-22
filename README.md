@@ -157,7 +157,7 @@ Prefix sequence → tree (example):
 pip install -r requirements.txt
 
 # quick CPU smoke-test (30 steps, ~1 s)
-python3 train.py --target pi --device cpu --steps 30 --batch 16
+python3 train.py --target pi --device cpu --steps 37 --batch 42
 
 # full GPU run on Apple silicon (~20 k steps, ~10 min)
 python3 train.py --target pi --device mps
