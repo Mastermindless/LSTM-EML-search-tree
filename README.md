@@ -252,6 +252,9 @@ LSTM-EML-search-tree/
   ├── loss.py
   ├── train.py
   ├── inference.py
+  /validate_tool
+  ├── validate_eml_general.py
+  ├── validation_ouput.txt
 
 ```
 
