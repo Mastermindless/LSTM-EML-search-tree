@@ -49,6 +49,7 @@ mpmath.mp.dps = 50
 # --------------------------------------------------------------------------- #
 MODEL_OUTPUT = """
 best_tree = pi
+best_tree = EML(0, -1)
 best_tree = EML(0, EML(EML(0, EML(pi, 1)), 1))
 best_tree = EML(1, EML(-1, e))
 best_tree = EML(EML(e, 1), 1)

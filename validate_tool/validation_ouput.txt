@@ -9,33 +9,34 @@ e      | EML(1, 1)                                            | 2.7182818       
 -1     | EML(0, EML(2, 1))                                    | -1.0                             | -1  via val  (err=0)         | 50
 pi     | EML(0, EML(EML(0, EML(pi, 1)), 1))                   | 3.1415927                        | pi  via val  (err=0)         | 50
 
-[source] <embedded MODEL_OUTPUT>   (25 expressions)
+[source] <embedded MODEL_OUTPUT>   (26 expressions)
 
 === MODEL OUTPUTS   (tolerance=1e-10) ===
 Label  | Expression                                           | Evaluation                       | Closest match                | Digits
 ----------------------------------------------------------------------------------------------------------------------------------------
 #1     | pi                                                   | 3.1415927                        | pi  via val  (err=0)         | 50
-#2     | EML(0, EML(EML(0, EML(pi, 1)), 1))                   | 3.1415927                        | pi  via val  (err=0)         | 50
-#3     | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
-#4     | EML(EML(e, 1), 1)                                    | 3814279.1                        | 0  via im  (err=0)           | 50
-#5     | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
-#6     | EML(EML(0, 1), EML(EML(EML(i, i), e), -i))           | (3.1350294 + -0.589709j)         | — (no target within tolerance) | 0
-#7     | EML(EML(e, 1), 2)                                    | 3814278.4                        | 0  via im  (err=0)           | 50
-#8     | EML(i, EML(0, e))                                    | (117.68218 + 0.84147098j)        | — (no target within tolerance) | 0
-#9     | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
+#2     | EML(0, -1)                                           | (1.0 + -3.1415927j)              | 1  via re  (err=0)           | 50
+#3     | EML(0, EML(EML(0, EML(pi, 1)), 1))                   | 3.1415927                        | pi  via val  (err=0)         | 50
+#4     | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
+#5     | EML(EML(e, 1), 1)                                    | 3814279.1                        | 0  via im  (err=0)           | 50
+#6     | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
+#7     | EML(EML(0, 1), EML(EML(EML(i, i), e), -i))           | (3.1350294 + -0.589709j)         | — (no target within tolerance) | 0
+#8     | EML(EML(e, 1), 2)                                    | 3814278.4                        | 0  via im  (err=0)           | 50
+#9     | EML(i, EML(0, e))                                    | (117.68218 + 0.84147098j)        | — (no target within tolerance) | 0
 #10    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
-#11    | EML(EML(e, 1), -1)                                   | (3814279.1 + -3.1415927j)        | pi  via abs_im  (err=0)      | 50
-#12    | EML(-1, EML(0, e))                                   | 117.50975                        | 0  via im  (err=0)           | 50
-#13    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
-#14    | EML(EML(0, -1), e)                                   | (-3.7182818 + 2.7473559e-51j)    | 0  via im  (err=2.7e-51)     | 0
-#15    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
+#11    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
+#12    | EML(EML(e, 1), -1)                                   | (3814279.1 + -3.1415927j)        | pi  via abs_im  (err=0)      | 50
+#13    | EML(-1, EML(0, e))                                   | 117.50975                        | 0  via im  (err=0)           | 50
+#14    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
+#15    | EML(EML(0, -1), e)                                   | (-3.7182818 + 2.7473559e-51j)    | 0  via im  (err=2.7e-51)     | 0
 #16    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
-#17    | EML(EML(e, -1), -1)                                  | (-3814279.1 + -3.1415927j)       | pi  via abs_im  (err=3.9e-45) | 44
+#17    | EML(1, EML(-1, e))                                   | (3.176957 + -3.1415927j)         | pi  via abs_im  (err=0)      | 50
 #18    | EML(EML(e, -1), -1)                                  | (-3814279.1 + -3.1415927j)       | pi  via abs_im  (err=3.9e-45) | 44
-#19    | EML(EML(e, EML(0, 1)), i)                            | (3814279.1 + -1.5707963j)        | — (no target within tolerance) | 0
-#20    | EML(EML(0, -1), EML(-1, i))                          | (-3.1965635 + 1.3407433j)        | — (no target within tolerance) | 0
-#21    | EML(EML(1, EML(-i, 2)), -i)                          | (-3.1667221 + 19.004844j)        | — (no target within tolerance) | 0
+#19    | EML(EML(e, -1), -1)                                  | (-3814279.1 + -3.1415927j)       | pi  via abs_im  (err=3.9e-45) | 44
+#20    | EML(EML(e, EML(0, 1)), i)                            | (3814279.1 + -1.5707963j)        | — (no target within tolerance) | 0
+#21    | EML(EML(0, -1), EML(-1, i))                          | (-3.1965635 + 1.3407433j)        | — (no target within tolerance) | 0
 #22    | EML(EML(1, EML(-i, 2)), -i)                          | (-3.1667221 + 19.004844j)        | — (no target within tolerance) | 0
-#23    | EML(EML(i, EML(0, 2)), EML(0, i))                    | (3.1059334 + 5.1748845j)         | — (no target within tolerance) | 0
-#24    | EML(i, EML(EML(0, EML(1, EML(e, e))), -i))           | (-3.1448182 + 0.80204297j)       | — (no target within tolerance) | 0
-#25    | EML(EML(i, EML(0, 2)), EML(-1, EML(-i, -1)))         | (3.160465 + 1.9810631j)          | — (no target within tolerance) | 0
+#23    | EML(EML(1, EML(-i, 2)), -i)                          | (-3.1667221 + 19.004844j)        | — (no target within tolerance) | 0
+#24    | EML(EML(i, EML(0, 2)), EML(0, i))                    | (3.1059334 + 5.1748845j)         | — (no target within tolerance) | 0
+#25    | EML(i, EML(EML(0, EML(1, EML(e, e))), -i))           | (-3.1448182 + 0.80204297j)       | — (no target within tolerance) | 0
+#26    | EML(EML(i, EML(0, 2)), EML(-1, EML(-i, -1)))         | (3.160465 + 1.9810631j)          | — (no target within tolerance) | 0
