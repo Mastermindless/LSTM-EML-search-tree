@@ -117,9 +117,6 @@ flowchart LR
 | `train.py`                                   | **Phase 4** — REINFORCE training loop (MPS / CUDA / CPU, curriculum precision) |
 | `inference.py`                               | Load checkpoint and print top-k discovered trees              |
 | `requirements.txt`                           | `torch`, `mpmath`, `numpy`                                    |
-| `VA00-SymbolicRegressionPackage-db31d58/`    | Mirror of Odrzywołek's reference repository (read-only)       |
-| `Odrzywolek_2026_EML_PI_e_sin_cos_tanh.pdf`  | Mirror of the 2026 paper                                      |
-| `deprecated/`                                | v02 precision-selector (`eml_operator.py`, `lstm_eml_model.py`, `pi_generator.py`, `validate_convergence.py`, old README + Medium draft) |
 
 ---
 
