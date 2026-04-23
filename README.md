@@ -107,10 +107,7 @@ flowchart LR
 ## What is in this repository
 
 | File                                         | Role                                                          |
-|----------------------------------------------|---------------------------------------------------------------|
-| [`LSTM-EML_search_tree_implementation_plan.md`](LSTM-EML_search_tree_implementation_plan.md) | Full technical concept — 4-phase blueprint, vocab, architecture, Acrylic critique |
-| [`implementation_plan.md`](implementation_plan.md) | Change log + performance profile vs. v02                 |
-| [`Instrcutions_LSTM_EML_serach_tree.md`](Instrcutions_LSTM_EML_serach_tree.md) | Original design prompt (phase specification)                 |
+|----------------------------------------------|---------------------------------------------------------------|            |
 | `config.py`                                  | Single source of truth for hyperparameters                    |
 | `eml_tree.py`                                | **Phase 1** — `EMLNode`, `Constant`, `EML(x,y)`, `evaluate_tree(dps)` |
 | `targets.py`                                 | **Phase 1** — mpmath ground-truth registry (π, e, i, φ, γ, ln 2, √2, e^π, π², ln(−1), exp(i)); LRU-cached digit slicing |
