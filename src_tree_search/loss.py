@@ -9,8 +9,12 @@ import mpmath
 import torch
 
 from eml_tree import evaluate_tree
-from targets import target_digits, value_digits
+from targets import channel_digits, target_digits
 from tokenizer import parse_prefix
+
+
+# Indices into the (re, im, abs) tuple returned by `channel_digits`.
+CHANNEL_NAMES = ("Re", "Im", "abs")
 
 
 def _common_prefix_len(a: str, b: str) -> int:
@@ -21,6 +25,23 @@ def _common_prefix_len(a: str, b: str) -> int:
     return n
 
 
+def _best_channel_match(
+    val: "mpmath.mpf | mpmath.mpc", gt: str, n_sig: int
+) -> tuple[int, int]:
+    """Return `(best_lcp, best_channel_idx)` for a rollout value against the
+    ground-truth digit string under the channel-agnostic encoder.
+    """
+    channels = channel_digits(val, n_sig)
+    best_lcp = -1
+    best_idx = 0
+    for idx, ch in enumerate(channels):
+        lcp = _common_prefix_len(ch, gt)
+        if lcp > best_lcp:
+            best_lcp = lcp
+            best_idx = idx
+    return best_lcp, best_idx
+
+
 def evaluate_rollout(
     tokens: torch.Tensor,        # (B, T) long (CPU is fine here)
     lengths: torch.Tensor,       # (B,) long
@@ -29,7 +50,15 @@ def evaluate_rollout(
     mp_dps: int,
     invalid_reward: float = 0.0,
 ) -> torch.Tensor:
-    """Return (B,) float reward in [0, 1] = matched_digits / target_digits_n."""
+    """Return (B,) float reward in [0, 1].
+
+    Reward model (channel-agnostic; see manuscript §5.4):
+        R(T) = max{ LCP(gt, ch) : ch ∈ {Re(v), Im(v), |v|} } / target_digits_n
+
+    The max over projections removes the need to pre-register which
+    component of a complex tree output carries the target, preserving the
+    unsupervised-discovery property of Part 2.
+    """
     tokens_cpu = tokens.detach().cpu().tolist()
     lens_cpu = lengths.detach().cpu().tolist()
     gt = target_digits(target_name, target_digits_n, mp_dps)
@@ -45,12 +74,46 @@ def evaluate_rollout(
         if val is None:
             rewards.append(invalid_reward)
             continue
-        if isinstance(val, mpmath.mpf):
-            val = mpmath.mpc(val, 0)
-        got = value_digits(val, target_digits_n)
-        rewards.append(_common_prefix_len(got, gt) / target_digits_n)
+        best_lcp, _ = _best_channel_match(val, gt, target_digits_n)
+        rewards.append(best_lcp / target_digits_n)
 
     return torch.tensor(rewards, dtype=torch.float32)
+
+
+def evaluate_rollout_verbose(
+    tokens: torch.Tensor,
+    lengths: torch.Tensor,
+    target_name: str,
+    target_digits_n: int,
+    mp_dps: int,
+    invalid_reward: float = 0.0,
+) -> tuple[torch.Tensor, list[str | None]]:
+    """Same as `evaluate_rollout` but also returns the winning channel name
+    (``"Re" | "Im" | "abs" | None``) per sample, for diagnostics.
+    """
+    tokens_cpu = tokens.detach().cpu().tolist()
+    lens_cpu = lengths.detach().cpu().tolist()
+    gt = target_digits(target_name, target_digits_n, mp_dps)
+
+    rewards: list[float] = []
+    channels: list[str | None] = []
+    for seq, L in zip(tokens_cpu, lens_cpu):
+        trimmed = seq[:L]
+        tree = parse_prefix(trimmed)
+        if tree is None:
+            rewards.append(invalid_reward)
+            channels.append(None)
+            continue
+        val = evaluate_tree(tree, mp_dps)
+        if val is None:
+            rewards.append(invalid_reward)
+            channels.append(None)
+            continue
+        best_lcp, idx = _best_channel_match(val, gt, target_digits_n)
+        rewards.append(best_lcp / target_digits_n)
+        channels.append(CHANNEL_NAMES[idx])
+
+    return torch.tensor(rewards, dtype=torch.float32), channels
 
 
 def reinforce_loss(

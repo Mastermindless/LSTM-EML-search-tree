@@ -13,7 +13,7 @@ import torch
 
 from config import CONFIG
 from eml_tree import evaluate_tree, tree_depth, tree_size
-from loss import evaluate_rollout
+from loss import evaluate_rollout_verbose
 from lstm_generator import LSTM_EML_Generator
 from targets import list_targets, target_digits
 from tokenizer import disabled_leaves_for_target, parse_prefix
@@ -49,7 +49,7 @@ def main():
     rollout = model.sample(target_ids, max_tokens=CONFIG.max_tokens,
                            disabled_leaves=disabled, temperature=1.0)
 
-    rewards = evaluate_rollout(
+    rewards, channels = evaluate_rollout_verbose(
         rollout.tokens, rollout.lengths,
         target_name=target_name,
         target_digits_n=args.digits,
@@ -59,7 +59,7 @@ def main():
     top = torch.topk(rewards, min(args.k, rewards.shape[0]))
     gt = target_digits(target_name, args.digits, CONFIG.mp_dps)
     print(f"target={target_name}   digits={args.digits}")
-    print(f"ground truth: {gt[:60]}…\n")
+    print(f"ground truth (|τ|): {gt[:60]}…\n")
 
     for rank, (r, idx) in enumerate(zip(top.values.tolist(), top.indices.tolist())):
         seq = rollout.tokens[idx, : rollout.lengths[idx]].tolist()
@@ -68,8 +68,9 @@ def main():
             continue
         val = evaluate_tree(tree, CONFIG.mp_dps)
         val_str = mpmath.nstr(val, 20) if val is not None else "—"
-        print(f"#{rank+1}  reward={r:.4f}  depth={tree_depth(tree)}  "
-              f"size={tree_size(tree)}")
+        ch = channels[idx] or "—"
+        print(f"#{rank+1}  reward={r:.4f}  channel={ch:>3s}  "
+              f"depth={tree_depth(tree)}  size={tree_size(tree)}")
         print(f"       tree : {tree!r}")
         print(f"       value: {val_str}\n")
 
