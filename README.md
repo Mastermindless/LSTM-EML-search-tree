@@ -107,7 +107,7 @@ flowchart LR
 ## What is in this repository
 
 | File                                         | Role                                                          |
-|----------------------------------------------|---------------------------------------------------------------|            |
+|----------------------------------------------|---------------------------------------------------------------|
 | `config.py`                                  | Single source of truth for hyperparameters                    |
 | `eml_tree.py`                                | **Phase 1** — `EMLNode`, `Constant`, `EML(x,y)`, `evaluate_tree(dps)` |
 | `targets.py`                                 | **Phase 1** — mpmath ground-truth registry (π, e, i, φ, γ, ln 2, √2, e^π, π², ln(−1), exp(i)); LRU-cached digit slicing |
