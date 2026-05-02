@@ -11,6 +11,9 @@ This version learns *the tree itself* — which means the same controller can
 discover symbolic representations of arbitrary transcendental constants from
 the Odrzywołek EML operator family.
 
+By Schwill M. 2026; https://doi.org/10.5281/zenodo.19714280
+See PDF: https://shorturl.at/fDA2M
+
 ---
 
 ## TL;DR for a wide audience
